@@ -1,5 +1,9 @@
 # sketchLibraryNTP
 
+ESP8266用のNTPライブラリ
+
+Timeライブラリ の setSyncProvider で使用可能
+
 ```cpp
 #include "NTP.h"
 
