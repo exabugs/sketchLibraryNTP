@@ -5,12 +5,14 @@ ESP8266用のNTPライブラリ
 Timeライブラリ の setSyncProvider で使用可能
 
 ```cpp
-#include "NTP.h"
+#include <ESP8266WiFi.h>
+#include <NTP.h>
 
 void setup() {
   Serial.begin(115200);
   Serial.println();
 
+  // 自分のネットワークに合わせてください
   WiFi.begin("your-ssid", "your-password");
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -22,13 +24,13 @@ void setup() {
   Serial.println("WiFi connected");
 
   // 初期化
-  // 2390 はローカルのUDPポート。空いている番号で。
+  // 2390 はローカルのUDPポート。空いている番号なら何番でもいいです。
   ntp_begin(2390);
 
   // NTPサーバを変更 (デフォルト: ntp.nict.jp)
   //setTimeServer("s2csntp.miz.nao.ac.jp");
 
-  // 同期間隔を変更 (デフォルト: 300)
+  // NTP同期間隔を変更 (デフォルト: 300秒)
   //setSyncInterval(10);
 }
 
@@ -52,7 +54,6 @@ void display(){
   sprintf(s, format, year(t), month(t), day(t), hour(t), minute(t), second(t));
   Serial.print("UTC : ");
   Serial.println(s);
-
 }
 
 void loop() {
